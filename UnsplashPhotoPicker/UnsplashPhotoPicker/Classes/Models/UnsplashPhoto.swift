@@ -37,7 +37,10 @@ public struct UnsplashPhoto: Codable {
     public let likesCount: Int
     public let downloadsCount: Int?
     public let viewsCount: Int?
-
+    public var ratio: CGFloat {
+        return CGFloat(width) / CGFloat(height)
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case height
