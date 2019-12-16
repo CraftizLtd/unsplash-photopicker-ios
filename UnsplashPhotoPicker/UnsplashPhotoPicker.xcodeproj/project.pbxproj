@@ -49,6 +49,7 @@
 		23B683C0216BF83200CAA546 /* UnsplashPhotoPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 23B683BE216BF83200CAA546 /* UnsplashPhotoPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		23C24A71217D3BBC00C03E7B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C24A70217D3BBC00C03E7B /* EmptyView.swift */; };
 		23C288F421BF450800D97A3B /* UnsplashSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C288F321BF450800D97A3B /* UnsplashSearchController.swift */; };
+		A3A6429023A797030088A989 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A6428F23A797030088A989 /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		23B683BF216BF83200CAA546 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23C24A70217D3BBC00C03E7B /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		23C288F321BF450800D97A3B /* UnsplashSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSearchController.swift; sourceTree = "<group>"; };
+		A3A6428F23A797030088A989 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				09555F9A234BD9A6003CD26E /* UIColor+PhotoPicker.swift */,
 				23A0D203216D806800BEAE05 /* UIColor+Extensions.swift */,
 				23A0D249216D9D2400BEAE05 /* URL+Extensions.swift */,
+				A3A6428F23A797030088A989 /* View+Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				23A0D237216D901400BEAE05 /* PagingView.swift in Sources */,
 				23A0D23B216D92D500BEAE05 /* WaterfallLayout.swift in Sources */,
 				2333E0F221758AAD000B1900 /* ImageCache.swift in Sources */,
+				A3A6429023A797030088A989 /* View+Extensions.swift in Sources */,
 				23A0D1F1216D74B000BEAE05 /* UnsplashPhotoPickerViewController.swift in Sources */,
 				23A0D246216D9C9200BEAE05 /* UnsplashPhotoItemProvider.swift in Sources */,
 				23A0D229216D8AD600BEAE05 /* UnsplashPagedRequest.swift in Sources */,
