@@ -20,6 +20,9 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.delegate = self
+        searchBar.placeholder = "Search Photos"
+        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        searchBar.isTranslucent = false
         return searchBar
     }()
     
@@ -94,6 +97,8 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         setupCollectionView()
         setupSpinner()
         setupPeekAndPop()
+        
+        setSearchText(nil)
     }
     
     // MARK: - Setup
