@@ -63,7 +63,6 @@ class ViewController: UIViewController {
         )
         let unsplashPhotoPickerViewController = UnsplashPhotoPickerViewController(configuration: configuration)
         unsplashPhotoPickerViewController.modalPresentationStyle = .fullScreen
-        //unsplashPhotoPicker.photoPickerDelegate = self
 
         present(unsplashPhotoPickerViewController, animated: true, completion: nil)
     }

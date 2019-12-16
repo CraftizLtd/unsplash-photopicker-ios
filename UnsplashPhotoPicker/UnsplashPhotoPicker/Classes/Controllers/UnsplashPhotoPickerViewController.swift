@@ -65,7 +65,6 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         }
     }
     
-    
     private let editorialDataSource = PhotosDataSourceFactory.collection(identifier: Configuration.shared.editorialCollectionId).dataSource
     
     private var previewingContext: UIViewControllerPreviewing?
@@ -89,34 +88,12 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.photoPicker.background
+        view.backgroundColor = .white
         setupNotifications()
         setupSearchBar()
         setupCollectionView()
         setupSpinner()
         setupPeekAndPop()
-        
-        let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
-        setSearchText(trimmedQuery)
-    }
-    
-    override public func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if dataSource.items.count == 0 {
-            refresh()
-        }
-    }
-    
-    
-    
-    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate(alongsideTransition: { (_) in
-            self.layout.invalidateLayout()
-        })
     }
     
     // MARK: - Setup
@@ -126,9 +103,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    
     private func setupSearchBar() {
-        
         searchBarContainerView.addSubview(searchBar)
         searchBar.unsplash_bindFrameToSuperviewBounds()
         
@@ -258,7 +233,6 @@ public class UnsplashPhotoPickerViewController: UIViewController {
 extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
-        
         setSearchText(text)
         refresh()
         scrollToTop()
@@ -267,7 +241,6 @@ extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard self.searchText != nil && searchText.isEmpty else { return }
-        
         setSearchText(nil)
         refresh()
         reloadData()
@@ -297,12 +270,9 @@ extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
 
 // MARK: - UIScrollViewDelegate
 extension UnsplashPhotoPickerViewController: UIScrollViewDelegate {
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
-        }
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
     }
-    
 }
 
 // MARK: - PagedDataSourceDelegate
