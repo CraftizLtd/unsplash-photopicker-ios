@@ -47,7 +47,7 @@ public class UnsplashPhotoPicker: UINavigationController {
     public init(configuration: UnsplashPhotoPickerConfiguration) {
         Configuration.shared = configuration
 
-        self.photoPickerViewController = UnsplashPhotoPickerViewController()
+        self.photoPickerViewController = UnsplashPhotoPickerViewController(configuration: configuration)
 
         super.init(nibName: nil, bundle: nil)
 

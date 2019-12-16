@@ -61,10 +61,11 @@ class ViewController: UIViewController {
             query: searchQueryTextField.text,
             allowsMultipleSelection: allowsMultipleSelection
         )
-        let unsplashPhotoPicker = UnsplashPhotoPicker(configuration: configuration)
-        unsplashPhotoPicker.photoPickerDelegate = self
+        let unsplashPhotoPickerViewController = UnsplashPhotoPickerViewController(configuration: configuration)
+        unsplashPhotoPickerViewController.modalPresentationStyle = .fullScreen
+        //unsplashPhotoPicker.photoPickerDelegate = self
 
-        present(unsplashPhotoPicker, animated: true, completion: nil)
+        present(unsplashPhotoPickerViewController, animated: true, completion: nil)
     }
 
 }

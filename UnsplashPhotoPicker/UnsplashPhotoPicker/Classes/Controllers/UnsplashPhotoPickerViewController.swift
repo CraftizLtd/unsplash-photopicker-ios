@@ -12,7 +12,7 @@ protocol UnsplashPhotoPickerViewControllerDelegate: class {
     func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelect unsplashPhoto: UnsplashPhoto)
 }
 
-class UnsplashPhotoPickerViewController: UIViewController {
+public class UnsplashPhotoPickerViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -74,12 +74,10 @@ class UnsplashPhotoPickerViewController: UIViewController {
     weak var delegate: UnsplashPhotoPickerViewControllerDelegate?
     
     // MARK: - Lifetime
-    
-    init() {
+    public init(configuration: UnsplashPhotoPickerConfiguration) {
+        Configuration.shared = configuration
         self.dataSource = editorialDataSource
-        
         super.init(nibName: nil, bundle: nil)
-        
         dataSource.delegate = self
     }
     
@@ -89,7 +87,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
     
     // MARK: - View Life Cycle
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.photoPicker.background
@@ -103,7 +101,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
         setSearchText(trimmedQuery)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if dataSource.items.count == 0 {
@@ -113,7 +111,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
     
     
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
         coordinator.animate(alongsideTransition: { (_) in
@@ -140,15 +138,6 @@ class UnsplashPhotoPickerViewController: UIViewController {
             searchBarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
-        
-        let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let query = trimmedQuery, query.isEmpty == false { return }
-        
-        //navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
-        extendedLayoutIncludesOpaqueBars = true
     }
     
     private func setupCollectionView() {
@@ -267,7 +256,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
 
 // MARK: - UISearchBarDelegate
 extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
         
         setSearchText(text)
@@ -276,7 +265,7 @@ extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
         hideEmptyView()
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard self.searchText != nil && searchText.isEmpty else { return }
         
         setSearchText(nil)
@@ -286,7 +275,7 @@ extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
         hideEmptyView()
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         setSearchText(nil)
         refresh()
@@ -297,18 +286,18 @@ extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(false, animated: true)
     }
 }
 
 // MARK: - UIScrollViewDelegate
 extension UnsplashPhotoPickerViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if searchBar.isFirstResponder {
             searchBar.resignFirstResponder()
         }
@@ -367,7 +356,7 @@ extension UnsplashPhotoPickerViewController: PagedDataSourceDelegate {
 
 // MARK: - UIViewControllerPreviewingDelegate
 extension UnsplashPhotoPickerViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = collectionView.indexPathForItem(at: location),
             let cellAttributes = collectionView.layoutAttributesForItem(at: indexPath),
             let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell,
@@ -378,7 +367,7 @@ extension UnsplashPhotoPickerViewController: UIViewControllerPreviewingDelegate 
         return UnsplashPhotoPickerPreviewViewController(image: image)
     }
     
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+    public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
     }
 }
 
