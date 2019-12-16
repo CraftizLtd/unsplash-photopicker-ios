@@ -32,13 +32,11 @@ class UnsplashPhotoPickerPreviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupPhotoImageView()
     }
 
     private func setupPhotoImageView() {
         view.addSubview(photoImageView)
-
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(equalTo: view.topAnchor),
             photoImageView.leftAnchor.constraint(equalTo: view.leftAnchor),

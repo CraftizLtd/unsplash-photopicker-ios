@@ -74,7 +74,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     private var previewingContext: UIViewControllerPreviewing?
     private var searchText: String?
     
-    weak var delegate: UnsplashPhotoPickerViewControllerDelegate?
+    public weak var delegate: UnsplashPhotoPickerViewControllerDelegate?
     
     // MARK: - Lifetime
     public init(configuration: UnsplashPhotoPickerConfiguration) {
