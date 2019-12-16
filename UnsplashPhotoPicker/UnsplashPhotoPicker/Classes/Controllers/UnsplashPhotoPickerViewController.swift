@@ -13,7 +13,20 @@ protocol UnsplashPhotoPickerViewControllerDelegate: class {
     func unsplashPhotoPickerViewControllerDidCancel(_ viewController: UnsplashPhotoPickerViewController)
 }
 
-class UnsplashPhotoPickerViewController: UIViewController {
+class UnsplashPhotoPickerViewController: UIViewController, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, searchText.isEmpty == false else {
+            return
+        }
+            setSearchText(nil)
+            refresh()
+            reloadData()
+            scrollToTop()
+            hideEmptyView()
+            updateTitle()
+            updateDoneButtonState()
+    }
+    
 
     // MARK: - Properties
 
@@ -34,14 +47,31 @@ class UnsplashPhotoPickerViewController: UIViewController {
     }()
 
     private lazy var searchController: UISearchController = {
-        let searchController = UnsplashSearchController(searchResultsController: nil)
-        searchController.delegate = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "search.placeholder".localized()
-        searchController.searchBar.autocapitalizationType = .none
         return searchController
+        
+        
+        
+        
+        
+//        let searchController = UnsplashSearchController(searchResultsController: nil)
+//        searchController.delegate = self
+//        searchController.obscuresBackgroundDuringPresentation = false
+//        searchController.hidesNavigationBarDuringPresentation = false
+//        searchController.searchBar.delegate = self
+//        searchController.searchBar.placeholder = "search.placeholder".localized()
+//        searchController.searchBar.autocapitalizationType = .none
+        
+    }()
+    
+    private lazy var searchBarContainerView: UIView = {
+        let searchBarContainerView = UIView()
+        searchBarContainerView.translatesAutoresizingMaskIntoConstraints = false
+        return searchBarContainerView
     }()
 
     private lazy var layout = WaterfallLayout(with: self)
@@ -163,10 +193,23 @@ class UnsplashPhotoPickerViewController: UIViewController {
     }
 
     private func setupSearchController() {
+        
+        searchBarContainerView.addSubview(searchController.searchBar)
+        searchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchController.searchBar.unsplash_bindFrameToSuperviewBounds()
+        
+        view.addSubview(searchBarContainerView)
+        NSLayoutConstraint.activate([
+            searchBarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        
         let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
         if let query = trimmedQuery, query.isEmpty == false { return }
 
-        navigationItem.searchController = searchController
+        //navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         extendedLayoutIncludesOpaqueBars = true
@@ -174,9 +217,8 @@ class UnsplashPhotoPickerViewController: UIViewController {
 
     private func setupCollectionView() {
         view.addSubview(collectionView)
-
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: searchBarContainerView.bottomAnchor),
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
@@ -433,5 +475,24 @@ extension UnsplashPhotoPickerViewController: UIViewControllerPreviewingDelegate 
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+    }
+}
+
+private extension UIView {
+
+    /// Adds constraints to this `UIView` instances `superview` object to make sure this always has the same size as the superview.
+    /// Please note that this has no effect if its `superview` is `nil` – add this `UIView` instance as a subview before calling this.
+    func unsplash_bindFrameToSuperviewBounds() {
+        guard let superview = self.superview else {
+            print("Error! `superview` was nil – call `addSubview(view: UIView)` before calling `bindFrameToSuperviewBounds()` to fix this.")
+            return
+        }
+
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.topAnchor.constraint(equalTo: superview.topAnchor, constant: 0).isActive = true
+        self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: 0).isActive = true
+        self.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 0).isActive = true
+        self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: 0).isActive = true
+
     }
 }
