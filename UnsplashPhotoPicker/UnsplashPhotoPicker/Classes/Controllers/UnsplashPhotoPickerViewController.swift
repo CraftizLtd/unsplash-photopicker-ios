@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol UnsplashPhotoPickerViewControllerDelegate: class {
+public protocol UnsplashPhotoPickerViewControllerDelegate: class {
     func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelect unsplashPhoto: UnsplashPhotoWithThumbnail)
 }
 

@@ -80,7 +80,7 @@ public class UnsplashPhotoPicker: UINavigationController {
 
 // MARK: - UnsplashPhotoPickerViewControllerDelegate
 extension UnsplashPhotoPicker: UnsplashPhotoPickerViewControllerDelegate {
-    func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelect unsplashPhoto: UnsplashPhotoWithThumbnail) {
+    public func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelect unsplashPhoto: UnsplashPhotoWithThumbnail) {
         
     }
     
