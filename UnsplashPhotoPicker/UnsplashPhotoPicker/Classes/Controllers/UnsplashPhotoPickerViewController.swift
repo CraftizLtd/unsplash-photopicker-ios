@@ -45,7 +45,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         collectionView.contentInsetAdjustmentBehavior = .automatic
         collectionView.layoutMargins = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         collectionView.backgroundColor = UIColor.photoPicker.background
-        collectionView.allowsMultipleSelection = Configuration.shared.allowsMultipleSelection
+        collectionView.allowsMultipleSelection = true
         return collectionView
     }()
     
@@ -118,7 +118,8 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         NSLayoutConstraint.activate([
             searchBarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchBarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchBarContainerView.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     

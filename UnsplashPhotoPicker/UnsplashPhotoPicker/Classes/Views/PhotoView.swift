@@ -16,47 +16,25 @@ class PhotoView: UIView {
     private var screenScale: CGFloat { return UIScreen.main.scale }
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var gradientView: GradientView!
-    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet var overlayViews: [UIView]!
     var previewImage: UIImage? {
         return imageView?.image
     }
-    var showsUsername = true {
-        didSet {
-            userNameLabel.alpha = showsUsername ? 1 : 0
-            gradientView.alpha = showsUsername ? 1 : 0
-        }
-    }
-
+  
     override func awakeFromNib() {
         super.awakeFromNib()
-
         accessibilityIgnoresInvertColors = true
-        gradientView.setColors([
-            GradientView.Color(color: .clear, location: 0),
-            GradientView.Color(color: UIColor(white: 0, alpha: 0.5), location: 1)
-        ])
     }
 
     func prepareForReuse() {
-        userNameLabel.text = nil
         imageView.backgroundColor = .clear
         imageView.image = nil
         imageDownloader.cancel()
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        let fontSize: CGFloat = traitCollection.horizontalSizeClass == .compact ? 10 : 13
-        userNameLabel.font = UIFont.systemFont(ofSize: fontSize)
-    }
-
     // MARK: - Setup
 
-    func configure(with photo: UnsplashPhoto, showsUsername: Bool = true) {
-        self.showsUsername = showsUsername
-        userNameLabel.text = photo.user.displayName
+    func configure(with photo: UnsplashPhoto) {
         imageView.backgroundColor = photo.color
         downloadImage(with: photo)
     }

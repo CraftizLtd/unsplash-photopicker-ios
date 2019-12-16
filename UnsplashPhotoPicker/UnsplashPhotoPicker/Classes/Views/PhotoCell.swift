@@ -18,7 +18,16 @@ class PhotoCell: UICollectionViewCell {
         // swiftlint:disable force_cast
         let photoView = (PhotoView.nib.instantiate(withOwner: nil, options: nil).first as! PhotoView)
         photoView.translatesAutoresizingMaskIntoConstraints = false
+        photoView.clipsToBounds = true
+        photoView.layer.cornerRadius = 4
         return photoView
+    }()
+    
+    let badgeImageView: UIImageView = {
+        let badgeImageView = UIImageView()
+        badgeImageView.image = Configuration.shared.premiumBadge
+        badgeImageView.translatesAutoresizingMaskIntoConstraints = false
+        return badgeImageView
     }()
 
 
@@ -36,15 +45,12 @@ class PhotoCell: UICollectionViewCell {
 
     private func postInit() {
         setupPhotoView()
+        setupPremiumBadge()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         photoView.prepareForReuse()
-    }
-
-    private func updateSelectedState() {
-        photoView.alpha = isSelected ? 0.7 : 1
     }
 
     // Override to bypass some expensive layout calculations.
@@ -56,6 +62,7 @@ class PhotoCell: UICollectionViewCell {
 
     func configure(with photo: UnsplashPhoto) {
         photoView.configure(with: photo)
+        badgeImageView.isHidden = Configuration.shared.isSubscribed
     }
 
     private func setupPhotoView() {
@@ -66,6 +73,15 @@ class PhotoCell: UICollectionViewCell {
             photoView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             photoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+    }
+    
+    private func setupPremiumBadge() {
+        contentView.preservesSuperviewLayoutMargins = true
+        contentView.addSubview(badgeImageView)
+        NSLayoutConstraint.activate([
+            badgeImageView.centerXAnchor.constraint(equalTo: contentView.trailingAnchor),
+            badgeImageView.centerYAnchor.constraint(equalTo: contentView.topAnchor),
         ])
     }
 

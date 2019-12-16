@@ -54,12 +54,11 @@ class ViewController: UIViewController {
     // MARK: - Action
 
     @IBAction func presentUnsplashPhotoPicker(sender: AnyObject?) {
-        let allowsMultipleSelection = selectionTypeSegmentedControl.selectedSegmentIndex == SelectionType.multiple.rawValue
         let configuration = UnsplashPhotoPickerConfiguration(
             accessKey: "1dbf43226fe67bfd05ae92ca37b36c39009cd1b156dfb0ac23efc9ebbcfc2d2e",
             secretKey: "1dbf43226fe67bfd05ae92ca37b36c39009cd1b156dfb0ac23efc9ebbcfc2d2e",
             query: searchQueryTextField.text,
-            allowsMultipleSelection: allowsMultipleSelection
+            premiumBadge: UIImage(named: "plus")
         )
         let unsplashPhotoPickerViewController = UnsplashPhotoPickerViewController(configuration: configuration)
         unsplashPhotoPickerViewController.modalPresentationStyle = .fullScreen
