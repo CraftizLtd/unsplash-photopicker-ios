@@ -88,8 +88,8 @@ public struct UnsplashPhoto: Codable {
 }
 
 public class UnsplashPhotoWithThumbnail {
-    let thumbnail: UIImage
-    let unsplashPhoto: UnsplashPhoto
+    public let thumbnail: UIImage
+    public let unsplashPhoto: UnsplashPhoto
     init(thumbnail: UIImage, unsplashPhoto: UnsplashPhoto) {
         self.thumbnail = thumbnail
         self.unsplashPhoto = unsplashPhoto
