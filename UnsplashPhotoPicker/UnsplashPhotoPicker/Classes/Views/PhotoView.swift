@@ -19,7 +19,9 @@ class PhotoView: UIView {
     @IBOutlet weak var gradientView: GradientView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet var overlayViews: [UIView]!
-
+    var previewImage: UIImage? {
+        return imageView?.image
+    }
     var showsUsername = true {
         didSet {
             userNameLabel.alpha = showsUsername ? 1 : 0

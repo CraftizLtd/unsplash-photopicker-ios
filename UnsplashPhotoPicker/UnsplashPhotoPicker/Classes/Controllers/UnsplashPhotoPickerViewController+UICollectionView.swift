@@ -45,8 +45,14 @@ extension UnsplashPhotoPickerViewController: UICollectionViewDelegate {
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let photo = dataSource.item(at: indexPath.item), collectionView.hasActiveDrag == false else { return }
-        delegate?.unsplashPhotoPickerViewController(self, didSelect: photo)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell,
+              let thumbnail = cell.photoView.previewImage,
+              let unsplashPhoto = dataSource.item(at: indexPath.item),
+              collectionView.hasActiveDrag == false else {
+                return
+        }
+        let unsplashPhotoWithThumbnail = UnsplashPhotoWithThumbnail(thumbnail: thumbnail, unsplashPhoto: unsplashPhoto)
+        delegate?.unsplashPhotoPickerViewController(self, didSelect: unsplashPhotoWithThumbnail)
     }
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol UnsplashPhotoPickerViewControllerDelegate: class {
-    func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelect unsplashPhoto: UnsplashPhoto)
+    func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelect unsplashPhoto: UnsplashPhotoWithThumbnail)
 }
 
 public class UnsplashPhotoPickerViewController: UIViewController {
@@ -23,6 +23,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         searchBar.placeholder = "Search Photos"
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         searchBar.isTranslucent = false
+        searchBar.tintColor = UIColor.black
         return searchBar
     }()
     
@@ -99,6 +100,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         setupPeekAndPop()
         
         setSearchText(nil)
+        refresh()
     }
     
     // MARK: - Setup
