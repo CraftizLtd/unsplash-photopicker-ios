@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		09555F9B234BD9A6003CD26E /* UIColor+PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09555F9A234BD9A6003CD26E /* UIColor+PhotoPicker.swift */; };
 		09F278B02193583A000A26A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F278AF2193583A000A26A4 /* Assets.xcassets */; };
-		09F278B22193589E000A26A4 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F278B12193589E000A26A4 /* CheckmarkView.swift */; };
 		231D127C218FAEB3002C5750 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 231D127B218FAEB3002C5750 /* Localizable.stringsdict */; };
 		231D127E218FB1DB002C5750 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 231D127D218FB1DB002C5750 /* Localizable.strings */; };
 		231D1280218FB3D7002C5750 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231D127F218FB3D7002C5750 /* String+Localization.swift */; };
@@ -48,14 +47,12 @@
 		23A0D24A216D9D2400BEAE05 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A0D249216D9D2400BEAE05 /* URL+Extensions.swift */; };
 		23B683C0216BF83200CAA546 /* UnsplashPhotoPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 23B683BE216BF83200CAA546 /* UnsplashPhotoPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		23C24A71217D3BBC00C03E7B /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C24A70217D3BBC00C03E7B /* EmptyView.swift */; };
-		23C288F421BF450800D97A3B /* UnsplashSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C288F321BF450800D97A3B /* UnsplashSearchController.swift */; };
 		A3A6429023A797030088A989 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A6428F23A797030088A989 /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		09555F9A234BD9A6003CD26E /* UIColor+PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PhotoPicker.swift"; sourceTree = "<group>"; };
 		09F278AF2193583A000A26A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		09F278B12193589E000A26A4 /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 		231D127B218FAEB3002C5750 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		231D127D218FB1DB002C5750 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		231D127F218FB3D7002C5750 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
@@ -96,7 +93,6 @@
 		23B683BE216BF83200CAA546 /* UnsplashPhotoPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnsplashPhotoPicker.h; sourceTree = "<group>"; };
 		23B683BF216BF83200CAA546 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23C24A70217D3BBC00C03E7B /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
-		23C288F321BF450800D97A3B /* UnsplashSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSearchController.swift; sourceTree = "<group>"; };
 		A3A6428F23A797030088A989 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,7 +139,6 @@
 				23A0D1F0216D74B000BEAE05 /* UnsplashPhotoPickerViewController.swift */,
 				2333E0EB21757C52000B1900 /* UnsplashPhotoPickerViewController+UICollectionView.swift */,
 				231D12E8218FCD0E002C5750 /* UnsplashPhotoPickerPreviewViewController.swift */,
-				23C288F321BF450800D97A3B /* UnsplashSearchController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -201,7 +196,6 @@
 		23A0D22F216D901400BEAE05 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				09F278B12193589E000A26A4 /* CheckmarkView.swift */,
 				23C24A70217D3BBC00C03E7B /* EmptyView.swift */,
 				23A0D234216D901400BEAE05 /* GradientView.swift */,
 				23A0D232216D901400BEAE05 /* PagingView.swift */,
@@ -344,7 +338,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				23A0D227216D8AD600BEAE05 /* ConcurrentOperation.swift in Sources */,
-				09F278B22193589E000A26A4 /* CheckmarkView.swift in Sources */,
 				23A0D24A216D9D2400BEAE05 /* URL+Extensions.swift in Sources */,
 				231D1280218FB3D7002C5750 /* String+Localization.swift in Sources */,
 				23A0D1FD216D7E9B00BEAE05 /* UnsplashPhoto.swift in Sources */,
@@ -360,7 +353,6 @@
 				23A0D21C216D825B00BEAE05 /* Configuration.swift in Sources */,
 				23A0D228216D8AD600BEAE05 /* SearchPhotosRequest.swift in Sources */,
 				23A0D22B216D8AD600BEAE05 /* GetCollectionPhotosRequest.swift in Sources */,
-				23C288F421BF450800D97A3B /* UnsplashSearchController.swift in Sources */,
 				23A0D20B216D806800BEAE05 /* Dictionary+Extensions.swift in Sources */,
 				23A0D1F3216D74C800BEAE05 /* UnsplashPhotoPicker.swift in Sources */,
 				2333E0F021758899000B1900 /* ImageDownloader.swift in Sources */,

@@ -21,15 +21,6 @@ class PhotoCell: UICollectionViewCell {
         return photoView
     }()
 
-    private lazy var checkmarkView: CheckmarkView = {
-        return CheckmarkView()
-    }()
-
-    override var isSelected: Bool {
-        didSet {
-            updateSelectedState()
-        }
-    }
 
     // MARK: - Lifetime
 
@@ -45,8 +36,6 @@ class PhotoCell: UICollectionViewCell {
 
     private func postInit() {
         setupPhotoView()
-        setupCheckmarkView()
-        updateSelectedState()
     }
 
     override func prepareForReuse() {
@@ -56,7 +45,6 @@ class PhotoCell: UICollectionViewCell {
 
     private func updateSelectedState() {
         photoView.alpha = isSelected ? 0.7 : 1
-        checkmarkView.alpha = isSelected ? 1 : 0
     }
 
     // Override to bypass some expensive layout calculations.
@@ -81,12 +69,4 @@ class PhotoCell: UICollectionViewCell {
         ])
     }
 
-    private func setupCheckmarkView() {
-        checkmarkView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(checkmarkView)
-        NSLayoutConstraint.activate([
-            contentView.rightAnchor.constraint(equalToSystemSpacingAfter: checkmarkView.rightAnchor, multiplier: CGFloat(1)),
-            contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: checkmarkView.bottomAnchor, multiplier: CGFloat(1))
-            ])
-    }
 }
