@@ -10,7 +10,9 @@ import UIKit
 
 class ImageCache {
 
-    static let cache = URLCache(
+    static let imageCache = NSCache<NSString, UIImage>()
+
+    static let urlCache = URLCache(
         memoryCapacity: Configuration.shared.memoryCapacity,
         diskCapacity: Configuration.shared.diskCapacity,
         diskPath: "unsplash"

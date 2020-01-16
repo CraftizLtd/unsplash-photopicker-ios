@@ -44,7 +44,7 @@ class PhotoView: UIView {
 
         let url = sizedImageURL(from: regularUrl)
 
-        imageDownloader.downloadPhoto(with: url, completion: { [weak self] (image, isCached) in
+        imageDownloader.downloadPhoto(with: url, isCaching: true, completion: { [weak self] (image, isCached) in
             guard let strongSelf = self, strongSelf.imageDownloader.isCancelled == false else { return }
 
             if isCached {
