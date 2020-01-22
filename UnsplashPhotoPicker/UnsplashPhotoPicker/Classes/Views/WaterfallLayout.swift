@@ -201,7 +201,7 @@ class WaterfallLayout: UICollectionViewLayout {
     }
 
     private func itemSize(from size: CGSize, with columnWidth: CGFloat) -> CGSize {
-        let height = size.height * columnWidth / size.width
+        let height = size.height * columnWidth / size.width + 20.0
         return CGSize(width: floor(columnWidth), height: floor(height))
     }
 }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PhotoViewDelegate: class {
+    func photoViewDidRequestAttribution(_ sender: PhotoView)
+}
+
 class PhotoView: UIView {
 
     static var nib: UINib { return UINib(nibName: "PhotoView", bundle: Bundle(for: PhotoView.self)) }
@@ -15,8 +19,13 @@ class PhotoView: UIView {
     private var imageDownloader = ImageDownloader()
     private var screenScale: CGFloat { return UIScreen.main.scale }
 
+    private(set) var photo: UnsplashPhoto?
+    weak var delegate: PhotoViewDelegate?
+
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet var overlayViews: [UIView]!
+    @IBOutlet var attributionButton: UIButton!
+
     var previewImage: UIImage? {
         return imageView?.image
     }
@@ -35,7 +44,13 @@ class PhotoView: UIView {
     // MARK: - Setup
 
     func configure(with photo: UnsplashPhoto) {
+        self.photo = photo
+
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 4
         imageView.backgroundColor = photo.color
+        attributionButton.setTitle(photo.user.displayName, for: .normal)
+        
         downloadImage(with: photo)
     }
 
@@ -65,6 +80,12 @@ class PhotoView: UIView {
             URLQueryItem(name: "max-w", value: "\(width)"),
             URLQueryItem(name: "max-h", value: "\(height)")
         ])
+    }
+
+    // MARK: - Actions
+
+    @IBAction func attributionButtonPressed(_ sender: Any) {
+        delegate?.photoViewDidRequestAttribution(self)
     }
 
     // MARK: - Utility

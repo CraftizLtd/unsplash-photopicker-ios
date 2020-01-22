@@ -19,6 +19,7 @@ extension UnsplashPhotoPickerViewController: UICollectionViewDataSource {
 
         guard let photoCell = cell as? PhotoCell, let photo = dataSource.item(at: indexPath.item) else { return cell }
 
+        photoCell.delegate = self
         photoCell.configure(with: photo)
 
         return photoCell
@@ -84,5 +85,13 @@ extension UnsplashPhotoPickerViewController: WaterfallLayoutDelegate {
         guard let photo = dataSource.item(at: indexPath.item) else { return .zero }
 
         return CGSize(width: photo.width, height: photo.height)
+    }
+}
+
+// MARK: - PhotoCellDelegate
+
+extension UnsplashPhotoPickerViewController: PhotoCellDelegate {
+    func photoCellDidRequestAttribution(_ sender: PhotoCell, photo: UnsplashPhoto) {
+        delegate?.unsplashPhotoPickerViewController(self, didRequestAttribution: photo.user)
     }
 }

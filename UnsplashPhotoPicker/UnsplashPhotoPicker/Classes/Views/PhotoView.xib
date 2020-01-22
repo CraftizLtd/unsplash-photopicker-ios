@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,19 +15,34 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KxT-2S-csa">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPp-hI-FHv" userLabel="attributionButton">
+                    <rect key="frame" x="0.0" y="651" width="375" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <state key="normal">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                    <connections>
+                        <action selector="attributionButtonPressed:" destination="Qdd-JF-Vs1" eventType="touchUpInside" id="NY7-mw-ibc"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="KxT-2S-csa" secondAttribute="trailing" id="9Uo-5A-Nil"/>
-                <constraint firstAttribute="bottom" secondItem="KxT-2S-csa" secondAttribute="bottom" id="AOo-3b-m51"/>
+                <constraint firstAttribute="bottom" secondItem="KxT-2S-csa" secondAttribute="bottom" constant="20" id="AOo-3b-m51"/>
+                <constraint firstItem="fPp-hI-FHv" firstAttribute="leading" secondItem="eEU-Be-zNb" secondAttribute="leading" id="DSO-ob-0Y6"/>
                 <constraint firstItem="KxT-2S-csa" firstAttribute="top" secondItem="Qdd-JF-Vs1" secondAttribute="top" id="KT3-b8-CNE"/>
+                <constraint firstItem="eEU-Be-zNb" firstAttribute="bottom" secondItem="fPp-hI-FHv" secondAttribute="bottom" id="Q8d-Ei-Ibp"/>
+                <constraint firstItem="fPp-hI-FHv" firstAttribute="top" secondItem="KxT-2S-csa" secondAttribute="bottom" constant="4" id="cqh-la-DSG"/>
                 <constraint firstItem="KxT-2S-csa" firstAttribute="leading" secondItem="Qdd-JF-Vs1" secondAttribute="leading" id="iJd-4q-ecn"/>
+                <constraint firstItem="eEU-Be-zNb" firstAttribute="trailing" secondItem="fPp-hI-FHv" secondAttribute="trailing" id="lPR-kL-dCL"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="eEU-Be-zNb"/>
             <connections>
+                <outlet property="attributionButton" destination="fPp-hI-FHv" id="Z7t-QZ-bdx"/>
                 <outlet property="imageView" destination="KxT-2S-csa" id="AjO-gG-2IN"/>
             </connections>
             <point key="canvasLocation" x="140" y="153"/>

@@ -20,6 +20,14 @@ public protocol UnsplashPhotoPickerDelegate: class {
     func unsplashPhotoPicker(_ photoPicker: UnsplashPhotoPicker, didSelectPhotos photos: [UnsplashPhoto])
 
     /**
+     Notifies the delegate that UnsplashPhotoPicker has selected a user.
+
+     - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
+     - parameter user:      The selected user.
+     */
+    func unsplashPhotoPicker(_ photoPicker: UnsplashPhotoPicker, didSelectUser user: UnsplashUser)
+
+    /**
      Notifies the delegate that UnsplashPhotoPicker has been canceled.
 
      - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
@@ -83,7 +91,10 @@ extension UnsplashPhotoPicker: UnsplashPhotoPickerViewControllerDelegate {
     public func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelect unsplashPhoto: UnsplashPhotoWithThumbnail) {
         
     }
-    
+
+    public func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didRequestAttribution user: UnsplashUser) {
+        photoPickerDelegate?.unsplashPhotoPicker(self, didSelectUser: user)
+    }
     
 //    func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelectPhotos photos: [UnsplashPhoto]) {
 //        trackDownloads(for: photos)

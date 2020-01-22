@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol PhotoCellDelegate: class {
+    func photoCellDidRequestAttribution(_ sender: PhotoCell, photo: UnsplashPhoto)
+}
+
 class PhotoCell: UICollectionViewCell {
 
     // MARK: - Properties
+
+    weak var delegate: PhotoCellDelegate?
 
     static let reuseIdentifier = "PhotoCell"
 
@@ -18,8 +24,6 @@ class PhotoCell: UICollectionViewCell {
         // swiftlint:disable force_cast
         let photoView = (PhotoView.nib.instantiate(withOwner: nil, options: nil).first as! PhotoView)
         photoView.translatesAutoresizingMaskIntoConstraints = false
-        photoView.clipsToBounds = true
-        photoView.layer.cornerRadius = 4
         return photoView
     }()
     
@@ -69,6 +73,7 @@ class PhotoCell: UICollectionViewCell {
     // MARK: - Setup
 
     func configure(with photo: UnsplashPhoto) {
+        photoView.delegate = self
         photoView.configure(with: photo)
         badgeImageView.isHidden = Configuration.shared.isSubscribed
     }
@@ -93,4 +98,14 @@ class PhotoCell: UICollectionViewCell {
         ])
     }
 
+}
+
+extension PhotoCell: PhotoViewDelegate {
+    func photoViewDidRequestAttribution(_ sender: PhotoView) {
+        guard let photo = sender.photo else {
+            return
+        }
+
+        delegate?.photoCellDidRequestAttribution(self, photo: photo)
+    }
 }

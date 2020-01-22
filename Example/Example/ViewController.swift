@@ -115,6 +115,10 @@ extension ViewController: UnsplashPhotoPickerDelegate {
         collectionView.reloadData()
     }
 
+    func unsplashPhotoPicker(_ photoPicker: UnsplashPhotoPicker, didSelectUser user: UnsplashUser) {
+        print(user.name ?? user.identifier)
+    }
+
     func unsplashPhotoPickerDidCancel(_ photoPicker: UnsplashPhotoPicker) {
         print("Unsplash photo picker did cancel")
     }
