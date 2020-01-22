@@ -52,6 +52,15 @@ extension UnsplashPhotoPickerViewController: UICollectionViewDelegate {
               collectionView.hasActiveDrag == false else {
                 return
         }
+
+        UIView.animate(withDuration: 0.2, animations: {
+            cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.2) {
+                cell.transform = .identity
+            }
+        })
+
         let unsplashPhotoWithThumbnail = UnsplashPhotoWithThumbnail(thumbnail: thumbnail, unsplashPhoto: unsplashPhoto)
         delegate?.unsplashPhotoPickerViewController(self, didSelect: unsplashPhotoWithThumbnail)
     }

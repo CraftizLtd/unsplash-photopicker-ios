@@ -30,7 +30,15 @@ class PhotoCell: UICollectionViewCell {
         return badgeImageView
     }()
 
-
+    override var isHighlighted: Bool {
+        didSet {
+            let scale: CGFloat = isHighlighted ? 0.95 : 1.0
+            UIView.animate(withDuration: 0.2) {
+                self.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }
+        }
+    }
+    
     // MARK: - Lifetime
 
     override init(frame: CGRect) {

@@ -197,7 +197,7 @@ class WaterfallLayout: UICollectionViewLayout {
     // MARK: - Utilities
 
     class func numberOfColumns(for width: CGFloat, itemSpacing: CGFloat = 16, minimumWidth: CGFloat = 150) -> Int {
-        return Int(floor(width - itemSpacing) / (minimumWidth + itemSpacing))
+        return 2
     }
 
     private func itemSize(from size: CGSize, with columnWidth: CGFloat) -> CGSize {
