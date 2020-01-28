@@ -233,7 +233,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         }
     }
     
-    func reloadData() {
+    public func reloadData() {
         collectionView.reloadData()
     }
     
