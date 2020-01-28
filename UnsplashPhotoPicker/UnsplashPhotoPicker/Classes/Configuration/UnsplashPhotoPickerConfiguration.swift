@@ -43,6 +43,7 @@ public struct UnsplashPhotoPickerConfiguration {
     /// The Unsplash editorial collection id.
     let editorialCollectionId = "317099"
 
+    var backgroundColor: UIColor = .red
     /**
      Initializes an `UnsplashPhotoPickerConfiguration` object with optionally customizable behaviors.
 
@@ -59,7 +60,8 @@ public struct UnsplashPhotoPickerConfiguration {
                 isSubscribed: Bool = false,
                 premiumBadge: UIImage? = nil,
                 memoryCapacity: Int = defaultMemoryCapacity,
-                diskCapacity: Int = defaultDiskCapacity) {
+                diskCapacity: Int = defaultDiskCapacity,
+                backgroundColor: UIColor) {
         self.accessKey = accessKey
         self.secretKey = secretKey
         self.query = query
@@ -67,6 +69,7 @@ public struct UnsplashPhotoPickerConfiguration {
         self.premiumBadge = premiumBadge
         self.memoryCapacity = memoryCapacity
         self.diskCapacity = diskCapacity
+        self.backgroundColor = backgroundColor
     }
 
     init() {}

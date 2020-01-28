@@ -50,7 +50,11 @@ class PhotoView: UIView {
         imageView.layer.cornerRadius = 4
         imageView.backgroundColor = photo.color
         attributionButton.setTitle(photo.user.displayName, for: .normal)
-        
+        if #available(iOS 13.0, *) {
+            attributionButton.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            attributionButton.setTitleColor(UIColor.darkText, for: .normal)
+        }
         downloadImage(with: photo)
     }
 
