@@ -59,7 +59,7 @@ class ViewController: UIViewController {
             secretKey: "1dbf43226fe67bfd05ae92ca37b36c39009cd1b156dfb0ac23efc9ebbcfc2d2e",
             query: searchQueryTextField.text,
             premiumBadge: UIImage(named: "plus"),
-            backgroundColor: UIColor.white
+            backgroundColor: UIColor.white, basketBackgroundColor: .purple
         )
         let unsplashPhotoPickerViewController = UnsplashPhotoPickerViewController(configuration: configuration)
         unsplashPhotoPickerViewController.modalPresentationStyle = .fullScreen
