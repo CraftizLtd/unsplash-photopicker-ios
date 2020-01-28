@@ -233,6 +233,10 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         }
     }
     
+    public func update(isSubscribed: Bool) {
+        Configuration.shared.isSubscribed = isSubscribed
+    }
+    
     public func reloadData() {
         collectionView.reloadData()
     }
