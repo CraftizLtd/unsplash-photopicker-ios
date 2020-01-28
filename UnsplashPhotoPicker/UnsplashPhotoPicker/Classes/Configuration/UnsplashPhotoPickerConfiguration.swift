@@ -62,11 +62,11 @@ public struct UnsplashPhotoPickerConfiguration {
                 query: String? = nil,
                 isSubscribed: Bool,
                 premiumBadge: UIImage? = nil,
-                searchBarTextFieldBackgroundColor: UIColor,
+                textFieldBackgroundColor: UIColor,
                 memoryCapacity: Int = defaultMemoryCapacity,
                 diskCapacity: Int = defaultDiskCapacity,
-                backgroundColor: UIColor,
-                basketBackgroundColor: UIColor) {
+                viewBackgroundColor: UIColor,
+                cotainerBackgroundColor: UIColor) {
         self.accessKey = accessKey
         self.secretKey = secretKey
         self.query = query
@@ -74,9 +74,9 @@ public struct UnsplashPhotoPickerConfiguration {
         self.premiumBadge = premiumBadge
         self.memoryCapacity = memoryCapacity
         self.diskCapacity = diskCapacity
-        self.viewBackgroundColor = backgroundColor
-        self.cotainerBackgroundColor = basketBackgroundColor
-        self.textFieldBackgroundColor = searchBarTextFieldBackgroundColor
+        self.viewBackgroundColor = viewBackgroundColor
+        self.cotainerBackgroundColor = cotainerBackgroundColor
+        self.textFieldBackgroundColor = textFieldBackgroundColor
     }
 
     init() {}
