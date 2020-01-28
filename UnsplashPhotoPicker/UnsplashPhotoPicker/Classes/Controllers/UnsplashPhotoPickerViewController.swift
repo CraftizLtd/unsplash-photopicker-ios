@@ -95,7 +95,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Configuration.shared.backgroundColor
+        view.backgroundColor = Configuration.shared.viewBackgroundColor
         setupNotifications()
         setupSearchBar()
         setupCollectionView()
@@ -165,13 +165,14 @@ public class UnsplashPhotoPickerViewController: UIViewController {
             searchBarContainerView.heightAnchor.constraint(equalToConstant: 44)
         ])
         searchBarContainerView.clipsToBounds = false
-        searchBarContainerView.backgroundColor = Configuration.shared.basketBackgroundColor
         
-        if let searchBarTextFieldBackgroundColor = Configuration.shared.searchBarTextFieldBackgroundColor?.withAlphaComponent(0.8) {
+        Configuration.shared.textFieldBackgroundColor = UIColor(displayP3Red: 235/255, green: 236/255, blue: 242/255, alpha: 1)
+        
+        if let searchBarTextFieldBackgroundColor = Configuration.shared.textFieldBackgroundColor {
             searchTextField.backgroundColor = searchBarTextFieldBackgroundColor
             searchTextField.layer.backgroundColor = searchBarTextFieldBackgroundColor.cgColor
-            searchBarContainerView.backgroundColor = searchBarTextFieldBackgroundColor
         }
+        searchBarContainerView.backgroundColor =  Configuration.shared.cotainerBackgroundColor
 
     }
     

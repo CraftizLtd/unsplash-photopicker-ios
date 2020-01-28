@@ -43,9 +43,9 @@ public struct UnsplashPhotoPickerConfiguration {
     /// The Unsplash editorial collection id.
     let editorialCollectionId = "317099"
 
-    var backgroundColor: UIColor = .red
-    var basketBackgroundColor: UIColor = .purple
-    var searchBarTextFieldBackgroundColor: UIColor? = .cyan
+    var viewBackgroundColor: UIColor = .red
+    var cotainerBackgroundColor: UIColor = .purple
+    var textFieldBackgroundColor: UIColor? 
 
     /**
      Initializes an `UnsplashPhotoPickerConfiguration` object with optionally customizable behaviors.
@@ -74,9 +74,9 @@ public struct UnsplashPhotoPickerConfiguration {
         self.premiumBadge = premiumBadge
         self.memoryCapacity = memoryCapacity
         self.diskCapacity = diskCapacity
-        self.backgroundColor = backgroundColor
-        self.basketBackgroundColor = basketBackgroundColor
-        self.searchBarTextFieldBackgroundColor = searchBarTextFieldBackgroundColor
+        self.viewBackgroundColor = backgroundColor
+        self.cotainerBackgroundColor = basketBackgroundColor
+        self.textFieldBackgroundColor = searchBarTextFieldBackgroundColor
     }
 
     init() {}

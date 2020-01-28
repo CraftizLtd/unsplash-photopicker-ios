@@ -61,8 +61,8 @@ class ViewController: UIViewController {
             isSubscribed: false,
             premiumBadge: UIImage(named: "plus"),
             searchBarTextFieldBackgroundColor: .yellow,
-            backgroundColor: UIColor.white,
-            basketBackgroundColor: .purple
+            backgroundColor: UIColor.purple,
+            basketBackgroundColor: .green
         )
         let unsplashPhotoPickerViewController = UnsplashPhotoPickerViewController(configuration: configuration)
         unsplashPhotoPickerViewController.modalPresentationStyle = .fullScreen
