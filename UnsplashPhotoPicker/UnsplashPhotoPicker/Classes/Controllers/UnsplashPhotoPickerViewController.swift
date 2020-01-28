@@ -283,6 +283,7 @@ extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
         refresh()
         scrollToTop()
         hideEmptyView()
+        view.endEditing(true)
     }
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
