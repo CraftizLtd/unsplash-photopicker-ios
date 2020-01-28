@@ -24,6 +24,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         searchBar.delegate = self
         searchBar.placeholder = "Search Photos"
         searchBar.isTranslucent = false
+        searchBar.tintAdjustmentMode = .normal
         searchBar.tintColor = UIColor.black
         return searchBar
     }()
@@ -139,6 +140,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         
         searchTextField.textColor = textColor
         searchTextField.font = font
+        searchTextField.borderStyle = .none
         let leftView = (searchTextField.leftView as? UIImageView)
         leftView?.image = UIImage(named: "search")
         leftView?.image = leftView?.image?.withRenderingMode(.alwaysTemplate)
@@ -147,6 +149,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(defaultPlaceholderTextAttributes, for: .normal)
         searchTextField.tintColor = placeholderColor
         searchTextField.layer.cornerRadius = 6
+        searchTextField.clipsToBounds = true
         
         searchBarContainerView.addSubview(searchBar)
 
@@ -162,13 +165,13 @@ public class UnsplashPhotoPickerViewController: UIViewController {
             searchBarContainerView.heightAnchor.constraint(equalToConstant: 44)
         ])
         searchBarContainerView.clipsToBounds = false
-        if let searchBarTextFieldBackgroundColor = Configuration.shared.searchBarTextFieldBackgroundColor {
+        searchBarContainerView.backgroundColor = Configuration.shared.basketBackgroundColor
+        
+        if let searchBarTextFieldBackgroundColor = Configuration.shared.searchBarTextFieldBackgroundColor?.withAlphaComponent(0.8) {
             searchTextField.backgroundColor = searchBarTextFieldBackgroundColor
             searchTextField.layer.backgroundColor = searchBarTextFieldBackgroundColor.cgColor
-            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = searchBarTextFieldBackgroundColor
+            searchBarContainerView.backgroundColor = searchBarTextFieldBackgroundColor
         }
-
-        searchBarContainerView.backgroundColor = Configuration.shared.basketBackgroundColor
 
     }
     
@@ -395,7 +398,7 @@ extension UnsplashPhotoPickerViewController: UIViewControllerPreviewingDelegate 
             let image = cell.photoView.imageView.image else {
                 return nil
         }
-        previewingContext.sourceRect = cellAttributes.frame        
+        previewingContext.sourceRect = cellAttributes.frame
         return UnsplashPhotoPickerPreviewViewController(image: image)
     }
     
