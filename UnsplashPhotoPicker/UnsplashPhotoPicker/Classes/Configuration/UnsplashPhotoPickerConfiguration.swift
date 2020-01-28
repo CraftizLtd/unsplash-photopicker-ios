@@ -45,6 +45,7 @@ public struct UnsplashPhotoPickerConfiguration {
 
     var backgroundColor: UIColor = .red
     var basketBackgroundColor: UIColor = .purple
+    var searchBarTextFieldBackgroundColor: UIColor? = .cyan
 
     /**
      Initializes an `UnsplashPhotoPickerConfiguration` object with optionally customizable behaviors.
@@ -59,8 +60,9 @@ public struct UnsplashPhotoPickerConfiguration {
     public init(accessKey: String,
                 secretKey: String,
                 query: String? = nil,
-                isSubscribed: Bool = false,
+                isSubscribed: Bool,
                 premiumBadge: UIImage? = nil,
+                searchBarTextFieldBackgroundColor: UIColor,
                 memoryCapacity: Int = defaultMemoryCapacity,
                 diskCapacity: Int = defaultDiskCapacity,
                 backgroundColor: UIColor,
@@ -74,6 +76,7 @@ public struct UnsplashPhotoPickerConfiguration {
         self.diskCapacity = diskCapacity
         self.backgroundColor = backgroundColor
         self.basketBackgroundColor = basketBackgroundColor
+        self.searchBarTextFieldBackgroundColor = searchBarTextFieldBackgroundColor
     }
 
     init() {}

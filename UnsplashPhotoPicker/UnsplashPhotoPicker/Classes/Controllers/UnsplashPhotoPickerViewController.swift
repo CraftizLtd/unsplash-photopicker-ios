@@ -140,21 +140,19 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         searchTextField.textColor = textColor
         searchTextField.font = font
         let leftView = (searchTextField.leftView as? UIImageView)
-        print(UIImage(named: "search"))
         leftView?.image = UIImage(named: "search")
         leftView?.image = leftView?.image?.withRenderingMode(.alwaysTemplate)
         leftView?.tintColor = placeholderColor
 
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(defaultPlaceholderTextAttributes, for: .normal)
         searchTextField.tintColor = placeholderColor
-        
+        searchTextField.layer.cornerRadius = 6
         
         searchBarContainerView.addSubview(searchBar)
-        searchBar.unsplash_bindFrameToSuperviewBounds()
 
         view.addSubview(searchBarContainerView)
         NSLayoutConstraint.activate([
-            searchBar.widthAnchor.constraint(equalToConstant: 36),
+            searchBar.heightAnchor.constraint(equalToConstant: 36),
             searchBar.leadingAnchor.constraint(equalTo: searchBarContainerView.leadingAnchor, constant: 8),
             searchBar.trailingAnchor.constraint(equalTo: searchBarContainerView.trailingAnchor, constant: -8),
             searchBar.topAnchor.constraint(equalTo: searchBarContainerView.topAnchor),
@@ -163,13 +161,21 @@ public class UnsplashPhotoPickerViewController: UIViewController {
             searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             searchBarContainerView.heightAnchor.constraint(equalToConstant: 44)
         ])
+        searchBarContainerView.clipsToBounds = false
+        if let searchBarTextFieldBackgroundColor = Configuration.shared.searchBarTextFieldBackgroundColor {
+            searchTextField.backgroundColor = searchBarTextFieldBackgroundColor
+            searchTextField.layer.backgroundColor = searchBarTextFieldBackgroundColor.cgColor
+            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = searchBarTextFieldBackgroundColor
+        }
+
         searchBarContainerView.backgroundColor = Configuration.shared.basketBackgroundColor
+
     }
     
     private func setupCollectionView() {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: searchBarContainerView.bottomAnchor, constant: 8),
+            collectionView.topAnchor.constraint(equalTo: searchBarContainerView.bottomAnchor, constant: 0),
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
