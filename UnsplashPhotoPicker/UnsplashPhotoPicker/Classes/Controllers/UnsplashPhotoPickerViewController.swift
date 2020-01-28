@@ -159,6 +159,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
             searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             searchBarContainerView.heightAnchor.constraint(equalToConstant: 36)
         ])
+        searchBarContainerView.backgroundColor = Configuration.shared.basketBackgroundColor
     }
     
     private func setupCollectionView() {
