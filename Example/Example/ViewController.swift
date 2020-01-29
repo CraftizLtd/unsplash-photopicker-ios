@@ -60,9 +60,11 @@ class ViewController: UIViewController {
             query: searchQueryTextField.text,
             isSubscribed: false,
             premiumBadge: UIImage(named: "plus"),
-            textFieldBackgroundColor: .yellow,
-            viewBackgroundColor: UIColor.purple,
-            cotainerBackgroundColor: .green
+            textFieldBackgroundColor: Constants.Color.disabled,
+            viewBackgroundColor: .clear,
+            cotainerBackgroundColor: Constants.Color.background_white,
+            textColor: Constants.Color.title,
+            textPlaceholderColor: Constants.Color.notActive
         )
         let unsplashPhotoPickerViewController = UnsplashPhotoPickerViewController(configuration: configuration)
         unsplashPhotoPickerViewController.modalPresentationStyle = .fullScreen

@@ -45,7 +45,9 @@ public struct UnsplashPhotoPickerConfiguration {
 
     var viewBackgroundColor: UIColor = .red
     var cotainerBackgroundColor: UIColor = .purple
-    var textFieldBackgroundColor: UIColor? 
+    var textFieldBackgroundColor: UIColor?
+    var textColor: UIColor = .black
+    var textPlaceholderColor: UIColor = .lightGray
 
     /**
      Initializes an `UnsplashPhotoPickerConfiguration` object with optionally customizable behaviors.
@@ -66,7 +68,9 @@ public struct UnsplashPhotoPickerConfiguration {
                 memoryCapacity: Int = defaultMemoryCapacity,
                 diskCapacity: Int = defaultDiskCapacity,
                 viewBackgroundColor: UIColor,
-                cotainerBackgroundColor: UIColor) {
+                cotainerBackgroundColor: UIColor,
+                textColor: UIColor,
+                textPlaceholderColor: UIColor) {
         self.accessKey = accessKey
         self.secretKey = secretKey
         self.query = query
@@ -77,6 +81,8 @@ public struct UnsplashPhotoPickerConfiguration {
         self.viewBackgroundColor = viewBackgroundColor
         self.cotainerBackgroundColor = cotainerBackgroundColor
         self.textFieldBackgroundColor = textFieldBackgroundColor
+        self.textColor = textColor
+        self.textPlaceholderColor = textPlaceholderColor
     }
 
     init() {}

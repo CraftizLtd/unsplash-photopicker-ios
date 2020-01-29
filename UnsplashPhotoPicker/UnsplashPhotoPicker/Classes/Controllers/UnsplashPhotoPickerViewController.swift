@@ -116,44 +116,10 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     
     private func setupSearchBar() {
         
-        let searchTextField: UITextField
-
-        
-        let placeholderColor = UIColor(displayP3Red: 149/255, green: 153/255, blue: 158/255, alpha: 1)
-        let textColor = UIColor(displayP3Red: 62/255, green: 66/255, blue: 71/255, alpha: 1)
-        let font =  UIFont.systemFont(ofSize: 14)
-        
-        let defaultPlaceholderTextAttributes = [
-                       NSAttributedString.Key.font: font,
-                       NSAttributedString.Key.foregroundColor:  placeholderColor
-                    ]
-        let defaultPlaceholderText = "Search Photos"
-        let defualtPlaceholderAttributedText = NSAttributedString(string: defaultPlaceholderText, attributes: defaultPlaceholderTextAttributes)
-    
-        
-        if #available(iOS 13, *) {
-            searchTextField = searchBar.searchTextField
-        } else {
-            searchTextField = (searchBar.value(forKey: "searchField") as? UITextField) ?? UITextField()
-        }
-        
-        searchTextField.attributedPlaceholder = defualtPlaceholderAttributedText
-        
-        searchTextField.textColor = textColor
-        searchTextField.font = font
-        searchTextField.borderStyle = .none
-        let leftView = (searchTextField.leftView as? UIImageView)
-        leftView?.image = UIImage(named: "search")
-        leftView?.image = leftView?.image?.withRenderingMode(.alwaysTemplate)
-        leftView?.tintColor = placeholderColor
-
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(defaultPlaceholderTextAttributes, for: .normal)
-        searchTextField.tintColor = placeholderColor
-        searchTextField.layer.cornerRadius = 6
-        searchTextField.clipsToBounds = true
+        updateColors()
         
         searchBarContainerView.addSubview(searchBar)
-
+        
         view.addSubview(searchBarContainerView)
         NSLayoutConstraint.activate([
             searchBar.heightAnchor.constraint(equalToConstant: 36),
@@ -167,14 +133,8 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         ])
         searchBarContainerView.clipsToBounds = false
         
-        Configuration.shared.textFieldBackgroundColor = UIColor(displayP3Red: 235/255, green: 236/255, blue: 242/255, alpha: 1)
         
-        if let searchBarTextFieldBackgroundColor = Configuration.shared.textFieldBackgroundColor {
-            searchTextField.backgroundColor = searchBarTextFieldBackgroundColor
-            searchTextField.layer.backgroundColor = searchBarTextFieldBackgroundColor.cgColor
-        }
-        searchBarContainerView.backgroundColor =  Configuration.shared.cotainerBackgroundColor
-
+        
     }
     
     private func setupCollectionView() {
@@ -293,6 +253,61 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         }
     }
     
+    // MARK: - Trait
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateColors()
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateColors()
+    }
+    
+    private func updateColors() {
+        
+        let searchTextField: UITextField
+        
+        let placeholderColor = Configuration.shared.textPlaceholderColor
+        let textColor =  Configuration.shared.textColor
+        let font =  UIFont.systemFont(ofSize: 14)
+        
+        let defaultPlaceholderTextAttributes = [
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor:  placeholderColor
+        ]
+        let defaultPlaceholderText = "Search Photos"
+        let defualtPlaceholderAttributedText = NSAttributedString(string: defaultPlaceholderText, attributes: defaultPlaceholderTextAttributes)
+        
+        
+        if #available(iOS 13, *) {
+            searchTextField = searchBar.searchTextField
+        } else {
+            searchTextField = (searchBar.value(forKey: "searchField") as? UITextField) ?? UITextField()
+        }
+        
+        searchTextField.attributedPlaceholder = defualtPlaceholderAttributedText
+        
+        searchTextField.textColor = textColor
+        searchTextField.font = font
+        searchTextField.borderStyle = .none
+        let leftView = (searchTextField.leftView as? UIImageView)
+        leftView?.image = UIImage(named: "search")
+        leftView?.image = leftView?.image?.withRenderingMode(.alwaysTemplate)
+        leftView?.tintColor = placeholderColor
+        
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(defaultPlaceholderTextAttributes, for: .normal)
+        searchTextField.tintColor = placeholderColor
+        searchTextField.layer.cornerRadius = 6
+        searchTextField.clipsToBounds = true
+        
+        
+        if let searchBarTextFieldBackgroundColor = Configuration.shared.textFieldBackgroundColor {
+            searchTextField.backgroundColor = searchBarTextFieldBackgroundColor
+            searchTextField.layer.backgroundColor = searchBarTextFieldBackgroundColor.cgColor
+        }
+        searchBarContainerView.backgroundColor =  Configuration.shared.cotainerBackgroundColor
+    }
 }
 
 // MARK: - UISearchBarDelegate
