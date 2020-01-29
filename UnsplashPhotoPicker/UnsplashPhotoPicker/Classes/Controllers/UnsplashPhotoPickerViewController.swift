@@ -48,7 +48,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         collectionView.contentInsetAdjustmentBehavior = .automatic
         collectionView.showsVerticalScrollIndicator = false
         collectionView.layoutMargins = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
-        collectionView.backgroundColor = .clear//UIColor.photoPicker.background
+        collectionView.backgroundColor = .clear
         collectionView.allowsMultipleSelection = true
         return collectionView
     }()
@@ -256,6 +256,9 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     // MARK: - Trait
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        if self.traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: collectionView)
+        }
         updateColors()
     }
     
@@ -415,11 +418,57 @@ extension UnsplashPhotoPickerViewController: UIViewControllerPreviewingDelegate 
             let image = cell.photoView.imageView.image else {
                 return nil
         }
+        cell.backgroundColor = .clear
+
         previewingContext.sourceRect = cellAttributes.frame
         return UnsplashPhotoPickerPreviewViewController(image: image)
     }
     
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        let sourceRect = previewingContext.sourceRect
+        let location = CGPoint(x: sourceRect.origin.x + sourceRect.width / 2, y: sourceRect.origin.y + sourceRect.height / 2)
+        
+        guard let indexPath = collectionView.indexPathForItem(at: location) else { return }
+        collectionView(collectionView, didSelectItemAt: indexPath)
     }
+    
+    
+}
+
+@available(iOS 13.0, *)
+extension UnsplashPhotoPickerViewController {
+    
+    public func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell,
+            let image = cell.photoView.imageView.image else {
+                return nil
+        }
+        cell.backgroundColor = .clear
+        
+        let configuration =  UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: { () -> UIViewController? in
+            return  UnsplashPhotoPickerPreviewViewController(image: image)
+        }) { action in
+            let editMenu = UIAction(title: "Select", image: UIImage(systemName: "plus.circle.fill"), identifier: nil) { [weak self] _ in
+                guard let self = self else { return }
+                self.collectionView(self.collectionView, didSelectItemAt: indexPath)
+                
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, children: [ editMenu])
+        }
+        
+        return configuration
+    }
+    public 
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        
+        animator.addCompletion { [weak self] in
+            guard let self = self else { return }
+            self.collectionView(self.collectionView, didSelectItemAt: indexPath)
+        }
+    }
+    
 }
 
