@@ -15,6 +15,7 @@
 		231D12A0218FC338002C5750 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231D129F218FC338002C5750 /* PhotoCollectionViewCell.swift */; };
 		231D12A7218FC387002C5750 /* UnsplashPhotoPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 231D12A6218FC37E002C5750 /* UnsplashPhotoPicker.framework */; };
 		231D12A8218FC387002C5750 /* UnsplashPhotoPicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 231D12A6218FC37E002C5750 /* UnsplashPhotoPicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A3F948B523E16B34009F2EAC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F948B423E16B34009F2EAC /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		231D1299218FC2E9002C5750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		231D129F218FC338002C5750 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		231D12A1218FC37E002C5750 /* UnsplashPhotoPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnsplashPhotoPicker.xcodeproj; path = ../UnsplashPhotoPicker/UnsplashPhotoPicker.xcodeproj; sourceTree = "<group>"; };
+		A3F948B423E16B34009F2EAC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				231D128D218FC2E6002C5750 /* AppDelegate.swift */,
 				231D128F218FC2E6002C5750 /* ViewController.swift */,
+				A3F948B423E16B34009F2EAC /* Constants.swift */,
 				231D129F218FC338002C5750 /* PhotoCollectionViewCell.swift */,
 				231D1291218FC2E7002C5750 /* Main.storyboard */,
 				231D1294218FC2E9002C5750 /* Assets.xcassets */,
@@ -204,6 +207,7 @@
 				231D1290218FC2E6002C5750 /* ViewController.swift in Sources */,
 				231D128E218FC2E6002C5750 /* AppDelegate.swift in Sources */,
 				231D12A0218FC338002C5750 /* PhotoCollectionViewCell.swift in Sources */,
+				A3F948B523E16B34009F2EAC /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +363,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A5KVFWW9PB;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -379,7 +383,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A5KVFWW9PB;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

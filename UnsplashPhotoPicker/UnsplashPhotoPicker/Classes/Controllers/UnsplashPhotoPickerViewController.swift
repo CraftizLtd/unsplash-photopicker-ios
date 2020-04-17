@@ -19,11 +19,12 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
+        searchBar.searchBarStyle = .minimal
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.delegate = self
         searchBar.placeholder = "Search Photos"
-        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         searchBar.isTranslucent = false
+        searchBar.tintAdjustmentMode = .normal
         searchBar.tintColor = UIColor.black
         return searchBar
     }()
@@ -31,6 +32,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     private lazy var searchBarContainerView: UIView = {
         let searchBarContainerView = UIView()
         searchBarContainerView.translatesAutoresizingMaskIntoConstraints = false
+        searchBarContainerView.backgroundColor = .clear
         return searchBarContainerView
     }()
     
@@ -44,8 +46,9 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.reuseIdentifier)
         collectionView.register(PagingView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingView.reuseIdentifier)
         collectionView.contentInsetAdjustmentBehavior = .automatic
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.layoutMargins = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
-        collectionView.backgroundColor = UIColor.photoPicker.background
+        collectionView.backgroundColor = .clear
         collectionView.allowsMultipleSelection = true
         return collectionView
     }()
@@ -93,7 +96,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = Configuration.shared.viewBackgroundColor
         setupNotifications()
         setupSearchBar()
         setupCollectionView()
@@ -112,22 +115,32 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     }
     
     private func setupSearchBar() {
+        
+        updateColors()
+        
         searchBarContainerView.addSubview(searchBar)
-        searchBar.unsplash_bindFrameToSuperviewBounds()
         
         view.addSubview(searchBarContainerView)
         NSLayoutConstraint.activate([
+            searchBar.heightAnchor.constraint(equalToConstant: 36),
+            searchBar.leadingAnchor.constraint(equalTo: searchBarContainerView.leadingAnchor, constant: 8),
+            searchBar.trailingAnchor.constraint(equalTo: searchBarContainerView.trailingAnchor, constant: -8),
+            searchBar.topAnchor.constraint(equalTo: searchBarContainerView.topAnchor),
             searchBarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchBarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchBarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             searchBarContainerView.heightAnchor.constraint(equalToConstant: 44)
         ])
+        searchBarContainerView.clipsToBounds = false
+        
+        
+        
     }
     
     private func setupCollectionView() {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: searchBarContainerView.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: searchBarContainerView.bottomAnchor, constant: 0),
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
@@ -196,7 +209,11 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         }
     }
     
-    func reloadData() {
+    public func update(isSubscribed: Bool) {
+        Configuration.shared.isSubscribed = isSubscribed
+    }
+    
+    public func reloadData() {
         collectionView.reloadData()
     }
     
@@ -236,6 +253,64 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         }
     }
     
+    // MARK: - Trait
+    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if self.traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: collectionView)
+        }
+        updateColors()
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateColors()
+    }
+    
+    private func updateColors() {
+        
+        let searchTextField: UITextField
+        
+        let placeholderColor = Configuration.shared.textPlaceholderColor
+        let textColor =  Configuration.shared.textColor
+        let font =  UIFont.systemFont(ofSize: 14)
+        
+        let defaultPlaceholderTextAttributes = [
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor:  placeholderColor
+        ]
+        let defaultPlaceholderText = "Search Photos"
+        let defualtPlaceholderAttributedText = NSAttributedString(string: defaultPlaceholderText, attributes: defaultPlaceholderTextAttributes)
+        
+        
+        if #available(iOS 13, *) {
+            searchTextField = searchBar.searchTextField
+        } else {
+            searchTextField = (searchBar.value(forKey: "searchField") as? UITextField) ?? UITextField()
+        }
+        
+        searchTextField.attributedPlaceholder = defualtPlaceholderAttributedText
+        
+        searchTextField.textColor = textColor
+        searchTextField.font = font
+        searchTextField.borderStyle = .none
+        let leftView = (searchTextField.leftView as? UIImageView)
+        leftView?.image = UIImage(named: "search")
+        leftView?.image = leftView?.image?.withRenderingMode(.alwaysTemplate)
+        leftView?.tintColor = placeholderColor
+        
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(defaultPlaceholderTextAttributes, for: .normal)
+        searchTextField.tintColor = placeholderColor
+        searchTextField.layer.cornerRadius = 6
+        searchTextField.clipsToBounds = true
+        
+        
+        if let searchBarTextFieldBackgroundColor = Configuration.shared.textFieldBackgroundColor {
+            searchTextField.backgroundColor = searchBarTextFieldBackgroundColor
+            searchTextField.layer.backgroundColor = searchBarTextFieldBackgroundColor.cgColor
+        }
+        searchBarContainerView.backgroundColor =  Configuration.shared.cotainerBackgroundColor
+    }
 }
 
 // MARK: - UISearchBarDelegate
@@ -246,6 +321,7 @@ extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
         refresh()
         scrollToTop()
         hideEmptyView()
+        view.endEditing(true)
     }
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -348,11 +424,57 @@ extension UnsplashPhotoPickerViewController: UIViewControllerPreviewingDelegate 
             let image = cell.photoView.imageView.image else {
                 return nil
         }
-        previewingContext.sourceRect = cellAttributes.frame        
+        cell.backgroundColor = .clear
+
+        previewingContext.sourceRect = cellAttributes.frame
         return UnsplashPhotoPickerPreviewViewController(image: image)
     }
     
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        let sourceRect = previewingContext.sourceRect
+        let location = CGPoint(x: sourceRect.origin.x + sourceRect.width / 2, y: sourceRect.origin.y + sourceRect.height / 2)
+        
+        guard let indexPath = collectionView.indexPathForItem(at: location) else { return }
+        collectionView(collectionView, didSelectItemAt: indexPath)
     }
+    
+    
+}
+
+@available(iOS 13.0, *)
+extension UnsplashPhotoPickerViewController {
+    
+    public func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell,
+            let image = cell.photoView.imageView.image else {
+                return nil
+        }
+        cell.backgroundColor = .clear
+        
+        let configuration =  UIContextMenuConfiguration(identifier: indexPath as NSIndexPath, previewProvider: { () -> UIViewController? in
+            return  UnsplashPhotoPickerPreviewViewController(image: image)
+        }) { action in
+            let editMenu = UIAction(title: "Select", image: UIImage(systemName: "plus.circle.fill"), identifier: nil) { [weak self] _ in
+                guard let self = self else { return }
+                self.collectionView(self.collectionView, didSelectItemAt: indexPath)
+                
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, children: [ editMenu])
+        }
+        
+        return configuration
+    }
+    public 
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+        guard let indexPath = configuration.identifier as? IndexPath else { return }
+        
+        animator.addCompletion { [weak self] in
+            guard let self = self else { return }
+            self.collectionView(self.collectionView, didSelectItemAt: indexPath)
+        }
+    }
+    
 }
 

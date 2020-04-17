@@ -7,22 +7,24 @@
 //
 
 import UIKit
+import AVFoundation
 
 class UnsplashPhotoPickerPreviewViewController: UIViewController {
 
     private lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
+        imageView.backgroundColor = .clear
         return imageView
     }()
 
     private let image: UIImage
-
+    private let ratio: CGSize
+    
     init(image: UIImage) {
         self.image = image
-
+        ratio = .init(width: image.size.width / image.size.height, height: 1)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -32,17 +34,14 @@ class UnsplashPhotoPickerPreviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPhotoImageView()
-    }
-
-    private func setupPhotoImageView() {
+        view.backgroundColor = .clear
         view.addSubview(photoImageView)
-        NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            photoImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            photoImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            photoImageView.rightAnchor.constraint(equalTo: view.rightAnchor)
-        ])
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let maxFitFrame = AVMakeRect(aspectRatio: ratio, insideRect: view.bounds)
+        preferredContentSize = maxFitFrame.size
+        photoImageView.frame = maxFitFrame
     }
 
 }

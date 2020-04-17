@@ -76,8 +76,7 @@ class EmptyView: UIView {
 
     init() {
         super.init(frame: .zero)
-
-        backgroundColor = UIColor.photoPicker.background
+        backgroundColor = UIColor.clear
         setupContainerView()
         setupTitleLabel()
         setupDescriptionLabel()

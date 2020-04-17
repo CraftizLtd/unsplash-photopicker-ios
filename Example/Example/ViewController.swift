@@ -58,7 +58,13 @@ class ViewController: UIViewController {
             accessKey: "1dbf43226fe67bfd05ae92ca37b36c39009cd1b156dfb0ac23efc9ebbcfc2d2e",
             secretKey: "1dbf43226fe67bfd05ae92ca37b36c39009cd1b156dfb0ac23efc9ebbcfc2d2e",
             query: searchQueryTextField.text,
-            premiumBadge: UIImage(named: "plus")
+            isSubscribed: false,
+            premiumBadge: UIImage(named: "plus"),
+            textFieldBackgroundColor: Constants.Color.disabled,
+            viewBackgroundColor: .clear,
+            cotainerBackgroundColor: Constants.Color.background_white,
+            textColor: Constants.Color.title,
+            textPlaceholderColor: Constants.Color.notActive
         )
         let unsplashPhotoPickerViewController = UnsplashPhotoPickerViewController(configuration: configuration)
         unsplashPhotoPickerViewController.modalPresentationStyle = .fullScreen
