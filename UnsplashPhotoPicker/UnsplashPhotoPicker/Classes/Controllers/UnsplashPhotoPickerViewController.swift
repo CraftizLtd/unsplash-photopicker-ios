@@ -301,6 +301,12 @@ extension UnsplashPhotoPickerViewController: PagedDataSourceDelegate {
             
             return
         }
+
+        if dataSource === editorialDataSource {
+            dataSource.items.forEach { (photo: UnsplashPhoto) in
+                photo.isFree = true
+            }
+        }
         
         let newPhotosCount = items.count
         let startIndex = self.dataSource.items.count - newPhotosCount

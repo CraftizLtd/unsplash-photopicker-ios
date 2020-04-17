@@ -75,7 +75,7 @@ class PhotoCell: UICollectionViewCell {
     func configure(with photo: UnsplashPhoto) {
         photoView.delegate = self
         photoView.configure(with: photo)
-        badgeImageView.isHidden = Configuration.shared.isSubscribed
+        badgeImageView.isHidden = Configuration.shared.isSubscribed || photo.isFree
     }
 
     private func setupPhotoView() {

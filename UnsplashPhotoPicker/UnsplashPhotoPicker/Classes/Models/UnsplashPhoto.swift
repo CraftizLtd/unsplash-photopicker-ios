@@ -9,7 +9,7 @@
 import UIKit
 
 /// A struct representing a photo from the Unsplash API.
-public struct UnsplashPhoto: Codable {
+public class UnsplashPhoto: Codable {
 
     public enum URLKind: String, Codable {
         case raw
@@ -37,6 +37,7 @@ public struct UnsplashPhoto: Codable {
     public let likesCount: Int
     public let downloadsCount: Int?
     public let viewsCount: Int?
+    public var isFree: Bool = false
     public var ratio: CGFloat {
         return CGFloat(width) / CGFloat(height)
     }
@@ -55,7 +56,7 @@ public struct UnsplashPhoto: Codable {
         case viewsCount = "views"
     }
 
-    public init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         identifier = try container.decode(String.self, forKey: .identifier)
         height = try container.decode(Int.self, forKey: .height)
