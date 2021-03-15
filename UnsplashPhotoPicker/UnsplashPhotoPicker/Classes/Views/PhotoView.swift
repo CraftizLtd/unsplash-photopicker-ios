@@ -14,7 +14,7 @@ protocol PhotoViewDelegate: class {
 
 class PhotoView: UIView {
 
-    static var nib: UINib { return UINib(nibName: "PhotoView", bundle: Bundle(for: PhotoView.self)) }
+    static var nib: UINib { return UINib(nibName: "PhotoView", bundle: .module) }
 
     private var imageDownloader = ImageDownloader()
     private var screenScale: CGFloat { return UIScreen.main.scale }
