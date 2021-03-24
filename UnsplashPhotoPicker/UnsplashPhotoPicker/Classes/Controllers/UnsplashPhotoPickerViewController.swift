@@ -22,7 +22,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         searchBar.searchBarStyle = .minimal
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.delegate = self
-        searchBar.placeholder = "Search Photos"
+        searchBar.placeholder = "Search Photos on Unsplash"
         searchBar.isTranslucent = false
         searchBar.tintAdjustmentMode = .normal
         searchBar.tintColor = UIColor.black
@@ -122,19 +122,16 @@ public class UnsplashPhotoPickerViewController: UIViewController {
         
         view.addSubview(searchBarContainerView)
         NSLayoutConstraint.activate([
-            searchBar.heightAnchor.constraint(equalToConstant: 36),
             searchBar.leadingAnchor.constraint(equalTo: searchBarContainerView.leadingAnchor, constant: 8),
             searchBar.trailingAnchor.constraint(equalTo: searchBarContainerView.trailingAnchor, constant: -8),
             searchBar.topAnchor.constraint(equalTo: searchBarContainerView.topAnchor),
+            searchBar.bottomAnchor.constraint(equalTo: searchBarContainerView.bottomAnchor),
             searchBarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchBarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            searchBarContainerView.heightAnchor.constraint(equalToConstant: 44)
+            searchBarContainerView.heightAnchor.constraint(equalToConstant: 38.0)
         ])
         searchBarContainerView.clipsToBounds = false
-        
-        
-        
     }
     
     private func setupCollectionView() {
@@ -279,7 +276,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
             NSAttributedString.Key.font: font,
             NSAttributedString.Key.foregroundColor:  placeholderColor
         ]
-        let defaultPlaceholderText = "Search Photos"
+        let defaultPlaceholderText = "Search Photos on Unsplash"
         let defualtPlaceholderAttributedText = NSAttributedString(string: defaultPlaceholderText, attributes: defaultPlaceholderTextAttributes)
         
         
