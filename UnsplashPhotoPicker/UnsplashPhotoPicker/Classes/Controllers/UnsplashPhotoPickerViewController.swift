@@ -32,7 +32,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
     private lazy var searchBarContainerView: UIView = {
         let searchBarContainerView = UIView()
         searchBarContainerView.translatesAutoresizingMaskIntoConstraints = false
-        searchBarContainerView.backgroundColor = .clear
+        searchBarContainerView.backgroundColor = .white
         return searchBarContainerView
     }()
     
