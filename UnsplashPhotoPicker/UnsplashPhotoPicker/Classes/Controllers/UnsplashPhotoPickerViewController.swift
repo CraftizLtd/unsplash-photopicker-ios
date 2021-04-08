@@ -125,7 +125,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
             searchBar.leadingAnchor.constraint(equalTo: searchBarContainerView.leadingAnchor, constant: 8),
             searchBar.trailingAnchor.constraint(equalTo: searchBarContainerView.trailingAnchor, constant: -8),
             searchBar.topAnchor.constraint(equalTo: searchBarContainerView.topAnchor),
-            searchBar.bottomAnchor.constraint(equalTo: searchBarContainerView.bottomAnchor, constant: 8.0),
+            searchBar.bottomAnchor.constraint(equalTo: searchBarContainerView.bottomAnchor, constant: -8.0),
             searchBarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchBarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
