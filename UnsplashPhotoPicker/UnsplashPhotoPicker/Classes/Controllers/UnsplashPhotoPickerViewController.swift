@@ -306,7 +306,7 @@ public class UnsplashPhotoPickerViewController: UIViewController {
             searchTextField.backgroundColor = searchBarTextFieldBackgroundColor
             searchTextField.layer.backgroundColor = searchBarTextFieldBackgroundColor.cgColor
         }
-        searchBarContainerView.backgroundColor =  Configuration.shared.cotainerBackgroundColor
+        searchBarContainerView.backgroundColor = .white //Configuration.shared.cotainerBackgroundColor
     }
 }
 
